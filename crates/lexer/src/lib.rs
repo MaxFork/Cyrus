@@ -61,13 +61,6 @@ impl Lexer {
         self.input[range].to_string()
     }
 
-    fn is_emoji(&self, ch: char) -> bool {
-        ('\u{1F300}'..='\u{1F5FF}').contains(&ch) ||
-        ('\u{1F600}'..='\u{1F64F}').contains(&ch) ||
-        ('\u{1F680}'..='\u{1F6FF}').contains(&ch) ||
-        ('\u{1F900}'..='\u{1F9FF}').contains(&ch)
-    }
-
     fn peek_char(&self) -> char {
         self.input.chars().nth(self.next_pos).unwrap_or('\0')
     }
@@ -470,7 +463,7 @@ impl Lexer {
 
         let mut final_identifier = String::new();
 
-        while self.ch.is_alphanumeric() || self.ch == '_' || self.is_emoji(self.ch) {
+        while self.ch.is_alphanumeric() || self.ch == '_' {
             final_identifier.push(self.ch);
             self.read_char();
         }
