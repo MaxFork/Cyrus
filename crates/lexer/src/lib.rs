@@ -407,7 +407,7 @@ impl Lexer {
         if let Some(value) = final_char {
             Token {
                 kind: TokenKind::Literal(Literal::Char(value)),
-                span,
+                span: Span { start, end },
             }
         } else {
             CompileTimeError {
